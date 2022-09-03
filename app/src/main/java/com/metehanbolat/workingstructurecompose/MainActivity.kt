@@ -3,11 +3,15 @@ package com.metehanbolat.workingstructurecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.metehanbolat.workingstructurecompose.ui.theme.WorkingStructureComposeTheme
@@ -17,12 +21,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WorkingStructureComposeTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    MainScreen()
                 }
             }
         }
@@ -30,14 +33,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MainScreen() {
+    var counter by remember { mutableStateOf(0) }
+    
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+        Text(text = "Counter: $counter")
+
+        Button(
+            onClick = { counter++ }
+        ) {
+            Text(text = "Increase")
+        }
+    }
+    
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    WorkingStructureComposeTheme {
-        Greeting("Android")
-    }
+fun MainScreenPreview() {
+    MainScreen()
 }
