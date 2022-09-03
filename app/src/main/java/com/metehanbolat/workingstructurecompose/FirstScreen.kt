@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.FIRST_SCREEN
 import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.MAIN_SCREEN
 import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.SECOND_SCREEN
 
@@ -25,7 +26,11 @@ fun FirstScreen(navController: NavController = rememberNavController()) {
         Text(text = "Favorite Screen", fontSize = 50.sp)
 
         Button(
-            onClick = { navController.navigate(SECOND_SCREEN) }
+            onClick = {
+                navController.navigate(SECOND_SCREEN) {
+                    popUpTo(FIRST_SCREEN) { inclusive = true }
+                }
+            }
         ) {
             Text(text = "Change Screen")
         }
