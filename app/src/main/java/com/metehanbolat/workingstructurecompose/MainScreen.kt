@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.FIRST_SCREEN
 
 @Composable
 fun MainScreen(navController: NavController = rememberNavController()) {
@@ -24,7 +25,12 @@ fun MainScreen(navController: NavController = rememberNavController()) {
         Text(text = "Main Screen", fontSize = 50.sp)
 
         Button(
-            onClick = { navController.navigate(NavigationControllerConstants.FIRST_SCREEN) }
+            onClick = {
+                val name = "John"
+                val age = "24"
+                val city = "New York"
+                navController.navigate("$FIRST_SCREEN/$name/$age/$city")
+            }
         ) {
             Text(text = "Change Screen")
         }

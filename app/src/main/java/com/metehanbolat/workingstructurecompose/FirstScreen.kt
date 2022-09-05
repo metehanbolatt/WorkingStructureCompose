@@ -17,13 +17,20 @@ import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.MA
 import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.SECOND_SCREEN
 
 @Composable
-fun FirstScreen(navController: NavController = rememberNavController()) {
+fun FirstScreen(
+    navController: NavController = rememberNavController(),
+    document: Triple<String, String, String>
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier.fillMaxSize()
     ) {
         Text(text = "Favorite Screen", fontSize = 50.sp)
+
+        Text(text = document.first)
+        Text(text = document.second)
+        Text(text = document.third)
 
         Button(
             onClick = {
@@ -46,5 +53,6 @@ fun FirstScreen(navController: NavController = rememberNavController()) {
 @Preview(showBackground = true)
 @Composable
 fun FirstScreenPreview() {
-    FirstScreen()
+    val document = Triple("Metehan", "24", "İzmir")
+    FirstScreen(document = document)
 }
