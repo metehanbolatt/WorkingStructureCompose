@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.gson.Gson
 import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.FIRST_SCREEN
 
 @Composable
@@ -29,7 +30,8 @@ fun MainScreen(navController: NavController = rememberNavController()) {
                 val name = "John"
                 val age = "24"
                 val city = "New York"
-                navController.navigate("$FIRST_SCREEN/$name/$age/$city")
+                val person = Gson().toJson(Person("Jessica", 41, "London"))
+                navController.navigate("$FIRST_SCREEN/$name/$age/$city/$person")
             }
         ) {
             Text(text = "Change Screen")

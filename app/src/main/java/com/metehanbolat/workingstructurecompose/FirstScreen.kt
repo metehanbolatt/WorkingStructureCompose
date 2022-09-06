@@ -19,7 +19,8 @@ import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.SE
 @Composable
 fun FirstScreen(
     navController: NavController = rememberNavController(),
-    document: Triple<String, String, String>
+    document: Triple<String, String, String>,
+    person: Person
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -27,6 +28,8 @@ fun FirstScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         Text(text = "Favorite Screen", fontSize = 50.sp)
+
+        Text(text = "Name: ${person.name}\nAge: ${person.age}\nCity: ${person.city}")
 
         Text(text = document.first)
         Text(text = document.second)
@@ -53,6 +56,9 @@ fun FirstScreen(
 @Preview(showBackground = true)
 @Composable
 fun FirstScreenPreview() {
-    val document = Triple("Metehan", "24", "İzmir")
-    FirstScreen(document = document)
+    val document = Triple("John", "24", "Washington DC")
+    FirstScreen(
+        document = document,
+        person = Person("Jessica", 32, "London")
+    )
 }

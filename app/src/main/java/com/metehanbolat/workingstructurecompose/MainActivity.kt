@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.gson.Gson
 import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.FIRST_SCREEN
 import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.MAIN_SCREEN
 import com.metehanbolat.workingstructurecompose.NavigationControllerConstants.SECOND_SCREEN
@@ -43,11 +44,12 @@ fun NavigationController() {
             MainScreen(navController = navController)
         }
         composable(
-            "$FIRST_SCREEN/{name}/{age}/{city}",
+            "$FIRST_SCREEN/{name}/{age}/{city}/{person}",
             arguments = listOf(
                 navArgument("name") { type = NavType.StringType },
                 navArgument("age") { type = NavType.StringType },
-                navArgument("city") { type = NavType.StringType }
+                navArgument("city") { type = NavType.StringType },
+                navArgument("person") { type = NavType.StringType }
             )
         ) {
             it.arguments?.let { bundle ->
@@ -56,7 +58,8 @@ fun NavigationController() {
                     second = bundle.getString("age") ?: "",
                     third = bundle.getString("city")?: ""
                 )
-                FirstScreen(navController = navController, document)
+                val person = Gson().fromJson(bundle.getString("person"), Person::class.java)
+                FirstScreen(navController = navController, document, person)
             }
         }
         composable(SECOND_SCREEN) {
